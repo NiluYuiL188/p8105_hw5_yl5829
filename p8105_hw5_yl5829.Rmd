@@ -18,3 +18,19 @@ birthday <- function(n) {
 }
 ```
 
+```{r}
+sizes <- 2:50
+simulations <- 10000
+prob <- numeric(length(sizes))
+
+#for loop and run the function 10000 times for each group size between 2 and 50. 
+for (i in seq_along(sizes)) {
+  results <- replicate(simulations, birthday(sizes[i]))
+  prob[i] <- mean(results)
+}
+```
+
+```{r}
+
+```
+
