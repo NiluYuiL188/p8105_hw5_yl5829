@@ -9,6 +9,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(rvest)
 library(broom)
+library(purrr)
 ```
 
 ### Problem 1
@@ -151,6 +152,18 @@ baltimore_summary <- tibble(
 )
 
 # Print the result
-print(baltimore_summary)
+head(baltimore_summary)
+```
+
+```{r}
+# Run prop.test for each city and use purrr to tidy up the results
+city_results <- homicide %>%
+  mutate(
+    prop_test = map2(unsolved, total, ~ prop.test(.x, .y)),
+    tidy_results = map(prop_test, tidy)
+  ) %>%
+  unnest(tidy_results) %>%
+  select(city_state, estimate, conf.low, conf.high)
+head(city_results)
 ```
 
