@@ -8,6 +8,7 @@ date: "2024-11-14"
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(rvest)
+library(broom)
 ```
 
 ### Problem 1
@@ -131,5 +132,25 @@ homicide <- homicide %>%
     total = n(),
     unsolved = sum(disposition %in% c("Closed without arrest", "Open/No arrest"))
   )
+```
+
+```{r}
+#only keep data for Baltimore, MD and run prop.test
+baltimore <- filter(homicide, city_state == "Baltimore, MD")
+prop <- prop.test(baltimore$unsolved, baltimore$total)
+
+#tidy the output
+prop <- tidy(prop)
+
+#get proportion and confidence intervals
+baltimore_summary <- tibble(
+  city_state = "Baltimore, MD",
+  proportion = prop$estimate,
+  conf_low = prop$conf.low,
+  conf_high = prop$conf.high
+)
+
+# Print the result
+print(baltimore_summary)
 ```
 
