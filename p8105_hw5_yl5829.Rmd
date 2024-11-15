@@ -91,3 +91,27 @@ ggplot(power_data, aes(x = mu, y = power)) +
 ```
 By obverving the plot we can see that there is a clear positive association between the effect size (μ) and the power of the test.
 
+```{r}
+#get the average estimates
+estimate_data <- all_results %>%
+  group_by(mu) %>%
+  summarize(
+    avg_estimate = mean(estimates),
+    avg_rejected = mean(estimates[p_values < 0.05], na.rm = TRUE)
+  )
+
+#overlap plot of Average Estimate of Mu vs True Value of Mu
+ggplot(estimate_data, aes(x = mu)) +
+  geom_line(aes(y = avg_estimate), color = "black") +
+  geom_point(aes(y = avg_estimate), color = "black") +
+  geom_line(aes(y = avg_rejected), color = "red") +
+  geom_point(aes(y = avg_rejected), color = "red") +
+  labs(
+    title = "Average Estimate of Mu vs True Value of Mu",
+    x = "True Value of Mu",
+    y = "Average Estimate of Mu"
+  ) +
+  theme_minimal()
+```
+
+
