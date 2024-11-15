@@ -113,5 +113,6 @@ ggplot(estimate_data, aes(x = mu)) +
   ) +
   theme_minimal()
 ```
+The sample average of u hat across tests where the null is rejected is closer to the true value of μ, but it slightly overestimates. This might happen because the null is more likely to be rejected for larger observed effects. In contrast, the overall average is biased downward, especially for smaller values of μ, because it includes cases where the effect is too small to reject the null.
 
 
