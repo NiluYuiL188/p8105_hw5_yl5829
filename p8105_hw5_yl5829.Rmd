@@ -6,6 +6,8 @@ date: "2024-11-14"
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(rvest)
 ```
 
 ### Problem 1
@@ -39,4 +41,25 @@ plot(sizes, prob, type = "b",
 
 ```
 Probability increase as group size increase.
+
+### Problem 2
+```{r}
+#simulate data and perform t-test
+simulate <- function(mu, n = 30, sigma = 5, simulations = 5000) {
+  p_values <- numeric(simulations)
+  estimates <- numeric(simulations)
+  
+  for (i in 1:simulations) {
+    data <- rnorm(n, mean = mu, sd = sigma)
+    test <- t.test(data, mu = 0)
+    p_values[i] <- test$p.value
+    estimates[i] <- mean(data)
+  }
+  
+  list(p_values = p_values, estimates = estimates)
+}
+
+```
+
+
 
