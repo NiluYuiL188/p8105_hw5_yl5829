@@ -31,6 +31,12 @@ for (i in seq_along(sizes)) {
 ```
 
 ```{r}
+#plot
+plot(sizes, prob, type = "b", 
+     xlab = "Group Size", ylab = "Probability of Shared Birthday",
+     main = "Probability",
+     pch = 16, col = "blue")
 
 ```
+Probability increase as group size increase.
 
