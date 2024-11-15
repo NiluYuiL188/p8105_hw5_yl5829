@@ -72,5 +72,22 @@ all_results <- bind_rows(results, .id = "mu") %>%
   mutate(mu = as.numeric(mu))
 ```
 
+```{r}
+#plot showing the proportion of times the null was rejected (the power of the test) on the y axis  
+#and the true value of μ on the x axis
+power_data <- all_results %>%
+  group_by(mu) %>%
+  summarize(power = mean(p_values < 0.05))
+
+ggplot(power_data, aes(x = mu, y = power)) +
+  geom_line() +
+  geom_point() +
+  labs(
+    title = "Power of the Test vs True Value of Mu",
+    x = "True Value of Mu",
+    y = "Power"
+  ) +
+  theme_minimal()
+```
 
 
