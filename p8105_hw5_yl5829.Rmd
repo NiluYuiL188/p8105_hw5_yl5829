@@ -89,5 +89,5 @@ ggplot(power_data, aes(x = mu, y = power)) +
   ) +
   theme_minimal()
 ```
-
+By obverving the plot we can see that there is a clear positive association between the effect size (μ) and the power of the test.
 
