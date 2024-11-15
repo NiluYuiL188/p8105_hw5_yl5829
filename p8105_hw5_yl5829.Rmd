@@ -61,5 +61,16 @@ simulate <- function(mu, n = 30, sigma = 5, simulations = 5000) {
 
 ```
 
+```{r}
+#run the simulations for different mu
+mu <- 1:6
+results <- map(mu_values, ~ simulate(.x)) %>%
+  set_names(mu_values)
+
+# Combine results into one data frame
+all_results <- bind_rows(results, .id = "mu") %>%
+  mutate(mu = as.numeric(mu))
+```
+
 
 
