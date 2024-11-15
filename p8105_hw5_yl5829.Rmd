@@ -120,4 +120,7 @@ The sample average of u hat across tests where the null is rejected is closer to
 #load the data
 homicide <- read_csv("data/homicide-data.csv")
 ```
+The raw data contains a unique identifier uid for each case and a reported_data indicate what time homicide reported.
+It also contains victim information like last first name, race, age, sex. It has geographical details with the city and state of the homicide, latitude and longitude also included. Lastly it has information about the outcome of the case like closed by arrest, closed without arrest, or open/no arrest. Some data contains missing value.
+
 
